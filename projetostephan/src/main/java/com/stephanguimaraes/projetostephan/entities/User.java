@@ -1,4 +1,4 @@
-package entities;
+package com.stephanguimaraes.projetostephan.entities;
 
 import jakarta.persistence.*;
 
