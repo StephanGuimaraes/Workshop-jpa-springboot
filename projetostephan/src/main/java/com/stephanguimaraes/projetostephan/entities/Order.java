@@ -1,6 +1,7 @@
 package com.stephanguimaraes.projetostephan.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.stephanguimaraes.projetostephan.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,6 +12,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
+
+
+    private Integer orderStauts;
 
 
     @Id
@@ -27,10 +31,12 @@ public class Order implements Serializable {
 
     public Order(){}
 
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, OrderStatus orderStauts, User client) {
         this.id = id;
         this.moment = moment;
+        setOrderStauts(orderStauts);
         this.client = client;
+
     }
 
     public Long getId() {
@@ -55,6 +61,16 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public OrderStatus getOrderStauts() {
+        return OrderStatus.valueOf(orderStauts);
+    }
+
+    public void setOrderStauts(OrderStatus orderStauts) {
+        if(orderStauts != null) {
+            this.orderStauts = orderStauts.getCode();
+        }
     }
 
     @Override
