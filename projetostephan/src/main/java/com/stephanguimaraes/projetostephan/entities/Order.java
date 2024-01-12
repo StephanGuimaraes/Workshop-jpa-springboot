@@ -35,6 +35,10 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
+
 
     public Order(){}
 
@@ -72,6 +76,14 @@ public class Order implements Serializable {
 
     public OrderStatus getOrderStauts() {
         return OrderStatus.valueOf(orderStauts);
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 
     public void setOrderStauts(OrderStatus orderStauts) {
